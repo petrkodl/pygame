@@ -16,6 +16,7 @@ bomb = pygame.image.load("explosion.png")
 ballrect = ball.get_rect()
 bombrect = bomb.get_rect()
 explosion= pygame.mixer.Sound("bomb.wav")
+jump = pygame.mixer.Sound("jump.wav")
 
 padx = 10
 pady = 470
@@ -33,11 +34,14 @@ while 1:
     ballrect = ballrect.move(speed)
     if ballrect.left < 0 or ballrect.right > width:
         speed[0] = -speed[0]
+        jump.play()
     if ballrect.top < 0:
         speed[1] = -speed[1]
+        jump.play()
     if ballrect.bottom > height-5:
         if abs((padx + 25)-.5 * (ballrect.left + ballrect.right)) < 25:
             speed[1] = -speed[1]
+            jump.play()
         else:
             screen.fill(black)
             xx = (width - bombrect.width)/2
